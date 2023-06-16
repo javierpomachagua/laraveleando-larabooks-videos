@@ -26,6 +26,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::middleware('is.admin')->group(function () {
+        Route::get('/only-admin', function () {
+            return 'sólo el administrador puede ver esto';
+        });
+    });
+
+    Route::middleware('is.reader')->group(function () {
+        Route::get('/only-reader', function () {
+            return 'sólo el lector puede ver esto';
+        });
+    });
 });
+
+
+
+
 
 require __DIR__.'/auth.php';
