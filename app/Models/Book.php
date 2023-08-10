@@ -15,4 +15,14 @@ class Book extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function authors()
+    {
+        return $this->belongsToMany(Author::class);
+    }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class);
+    }
 }
