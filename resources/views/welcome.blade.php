@@ -259,10 +259,6 @@
                     </div>
                     <!-- /Review Item -->
                 @endforeach
-
-           @php
-               dd(DB::getQueryLog());
-           @endphp
             </div>
             <!-- /Review Grid -->
         </div>
