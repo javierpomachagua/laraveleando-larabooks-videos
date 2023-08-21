@@ -8,7 +8,13 @@ class WelcomePageController extends Controller
 {
     public function __invoke()
     {
-        $books = Book::with(['authors', 'genres'])->get();
+        $books = Book::query()
+            ->with(['authors', 'genres', 'reviews'])
+            ->withCount('reviews')
+            ->withAvg('reviews', 'stars')
+            ->orderByDesc('reviews_count')
+            ->take(4)
+            ->get();
 
         return view('welcome', compact('books'));
     }
