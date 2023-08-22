@@ -19,6 +19,7 @@ class WelcomePageController extends Controller
             ->get();
 
         $reviews = Review::query()
+            ->with(['book', 'user'])
             ->where('is_approved', '=', 1)
             ->where('stars', '=', 5)
             ->get()
