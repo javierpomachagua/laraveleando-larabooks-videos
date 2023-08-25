@@ -10,7 +10,7 @@ class WelcomePageController extends Controller
 {
     public function __invoke()
     {
-        $books = Book::query()
+        $featuredBooks = Book::query()
             ->with(['authors', 'genres', 'reviews'])
             ->withCount('reviews')
             ->withAvg('reviews', 'stars')
@@ -25,6 +25,14 @@ class WelcomePageController extends Controller
             ->get()
             ->random(4);
 
-        return view('welcome', compact('books', 'reviews'));
+        $books = Book::query()
+            ->with(['authors', 'genres', 'reviews'])
+            ->withAvg('reviews', 'stars')
+            ->withCount('reviews')
+            ->orderByDesc('reviews_avg_stars')
+            ->take(8)
+            ->get();
+
+        return view('welcome', compact('featuredBooks', 'reviews', 'books'));
     }
 }
