@@ -11,7 +11,7 @@ class BookPageController extends Controller
     public function __invoke()
     {
         $books = Book::query()
-            ->paginate(8);
+            ->paginate(1);
 
         return view('books', compact('books'));
     }

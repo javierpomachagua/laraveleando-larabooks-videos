@@ -1,3 +1,5 @@
+@props(['book', 'showDescription' => false])
+
 <!-- Books Item -->
 <a href="#" class="focus:outline-none xl:mb-0 mb-8 rounded-xl overflow-hidden shadow-xs bg-white">
     <div>
