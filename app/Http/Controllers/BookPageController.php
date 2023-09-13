@@ -15,6 +15,11 @@ class BookPageController extends Controller
         $book->loadAvg('reviews', 'stars')
             ->loadCount('reviews');
 
-        return view('books.show', compact('book'));
+        $reviews = $book->reviews()
+            ->where('is_approved', 1)
+            ->orderByDesc('created_at')
+            ->paginate(5);
+
+        return view('books.show', compact('book', 'reviews'));
     }
 }
