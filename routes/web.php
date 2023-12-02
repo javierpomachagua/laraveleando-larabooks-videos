@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookPageController;
 use App\Http\Controllers\BooksPageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StoreBookReviewController;
 use App\Http\Controllers\WelcomePageController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ Route::get('/', WelcomePageController::class);
 
 Route::get('/books', BooksPageController::class);
 
-Route::get('/books/{book}', BookPageController::class);
+Route::get('/books/{book}', BookPageController::class)->name('books.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -42,6 +43,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/only-reader', function () {
             return 'sólo el lector puede ver esto';
         });
+
+        Route::post('/books/{book}/reviews', StoreBookReviewController::class)
+            ->name('reviews.store');
     });
 });
 

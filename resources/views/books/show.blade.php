@@ -107,17 +107,22 @@
                     @auth
                         <!-- Create review -->
                         <p class="text-gray-700 text-base mt-3">Crear Reseña</p>
-                        <form action="#" method="POST" class="space-y-6 mt-2 mb-4 bg-gray-50 p-4 rounded-lg">
+
+                        <form action="{{ route('reviews.store', $book) }}" method="POST"
+                              class="space-y-6 mt-2 mb-4 bg-gray-50 p-4 rounded-lg">
+                            @csrf
                             <div>
                                 <label for="subject" class="text-sm text-gray-500">Asunto</label>
-                                <input type="text" name="subject" id="subject" placeholder="Ingresar asunto"
+                                <input type="text" name="title" id="title" placeholder="Ingresar asunto"
                                        class="block p-4 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-gray-500 focus:border-gray-500"/>
+                                <x-input-error :messages="$errors->get('title')" />
                             </div>
 
                             <div>
                                 <label for="text" class="text-sm text-gray-500">Reseña</label>
-                                <textarea name="text" id="text" placeholder="Ingresar reseña"
+                                <textarea name="description" id="description" placeholder="Ingresar reseña"
                                           class="block p-4 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-gray-500 focus:border-gray-500"></textarea>
+                                <x-input-error :messages="$errors->get('description')" />
                             </div>
 
                             <div>
@@ -162,6 +167,7 @@
                                                class="text-gray-600">5</label>
                                     </div>
                                 </div>
+                                <x-input-error :messages="$errors->get('stars')" />
                             </div>
 
                             <div>
@@ -241,8 +247,9 @@
                                 <path
                                     d="M470.13,644.34s-6.41-10.93,5.28-21.49c0,0-.4-4.27,7.72-2.7l19.67-.32s15,8.08,4.4,32.59C507.2,652.42,477.29,657.54,470.13,644.34Z"
                                     fill="#0071f2"/>
-                                <path d="M526.11,620.72s-7.33,23.93,10.77,21.49c0,0-4.61,6.32-21,5.89,0,0,.63-8.41-2.42-26Z"
-                                      fill="#0071f2"/>
+                                <path
+                                    d="M526.11,620.72s-7.33,23.93,10.77,21.49c0,0-4.61,6.32-21,5.89,0,0,.63-8.41-2.42-26Z"
+                                    fill="#0071f2"/>
                                 <path d="M637.18,620.72s-5.65,14.61-2.7,25.28c0,0-13.59,2.65-20.78-6.31l9.77-20.44Z"
                                       fill="#0071f2"/>
                                 <path
@@ -273,8 +280,8 @@
                                 <ellipse cx="536.66" cy="378.44" rx="8.83" ry="10.55" fill="#f9b499"/>
                             </svg>
                             <div>
-                                <a href="#" class="underline">Inicia Sesión</a> o <a
-                                    href="#" class="underline">Regístrate</a> para que puedas
+                                <a href="{{ route('login') }}" class="underline">Inicia Sesión</a> o <a
+                                    href="{{ route('register') }}" class="underline">Regístrate</a> para que puedas
                                 crear
                                 una
                                 reseña
@@ -290,7 +297,8 @@
                             <div>
                                 <p class="text-base text-gray-900 font-medium">{{ $review->title }}</p>
                                 <p class="text-base text-gray-500">{{ $review->description }}</p>
-                                <p class="text-sm text-gray-400">{{ $review->user->name }} - {{ $review->created_at->format('d/m/Y') }}</p>
+                                <p class="text-sm text-gray-400">{{ $review->user->name }}
+                                    - {{ $review->created_at->format('d/m/Y') }}</p>
                             </div>
                             <!-- /Review Item -->
                         @endforeach
