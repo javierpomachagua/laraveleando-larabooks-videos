@@ -27,6 +27,10 @@
                 </header>
             @endif
 
+            @if(session()->has('message'))
+                <p>{{ session('message') }}</p>
+            @endif
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}

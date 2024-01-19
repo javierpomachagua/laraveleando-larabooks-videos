@@ -18,6 +18,12 @@
     <div class="px-2 md:px-20 pt-6 max-w-7xl mx-auto">
         @include('layouts.nav')
 
+        @if(session('message'))
+            <div class="mt-8 py-3 px-5 bg-green-100 text-green-900 text-sm rounded-md border border-green-200" role="alert">
+                {{ session('message') }}
+            </div>
+        @endif
+
         <!-- Book Detail -->
         <div class="grid grid-cols-1 md:grid-cols-6 my-10 gap-4">
             <div class="col-span-2 flex flex-col items-center">
