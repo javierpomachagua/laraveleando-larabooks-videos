@@ -24,6 +24,6 @@ class BooksPageController extends Controller
             })
             ->paginate(8);
 
-        return view('books', compact('books'));
+        return view('books.index', compact('books'));
     }
 }
